@@ -6,7 +6,7 @@
 /*   By: ahaloua <ahaloua@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 16:45:31 by ahaloua           #+#    #+#             */
-/*   Updated: 2019/06/30 15:23:28 by ahaloua          ###   ########.fr       */
+/*   Updated: 2019/06/30 15:29:06 by ahaloua          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ static int ft_isTetri(const char *str)
 	size_t hashs;
 	size_t dots;
 	int i;
-	count = 0x0;
+	hashs = 0x0;
+	dots = 0x0;
 	i = 0x0;
 	while (str[i])
 	{
