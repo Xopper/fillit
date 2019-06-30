@@ -6,7 +6,7 @@
 /*   By: ahaloua <ahaloua@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 16:45:31 by ahaloua           #+#    #+#             */
-/*   Updated: 2019/06/30 15:29:06 by ahaloua          ###   ########.fr       */
+/*   Updated: 2019/06/30 19:31:32 by aazeroua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,39 +18,44 @@ static int ft_isTetri(const char *str)
 	size_t hashs;
 	size_t dots;
 	int i;
-	hashs = 0x0;
-	dots = 0x0;
-	i = 0x0;
+	hashs = 0;
+	dots = 0;
+	i = 0;
 	while (str[i])
 	{
 		if (str[i] == '#')
-			hashs += 0x1;
+			hashs += 1;
 		else if (str[i] == '.')
-			dots += 0x1;
-		i += 0x1;
+			dots += 1;
+		i += 1;
 	}
-	if (hashs == 12 && dots == 4)
+	if (hashs == 4 && dots == 12)
 		return (0x1);
 	return (0x0);
 }
 
-/*
-static size_t ft_countDots(const char *str)
+int		check_conn(char *str)
 {
-	size_t count;
 	int i;
+	int count;
 
-	count = 0x0;
-	i = 0x0;
+	i = 0;
+	count = 0;
 	while (str[i])
 	{
-		if (str[i] == '.')
-			count += 0x1;
-		i += 0x1;
+		if (str[i] == '#')
+		{
+			if (str[i + 1] == '#')
+				count++;
+			if (str[i + 5] == '#')
+				count ++;
+		}
+		i++;
 	}
-	return (count);
+	if (count == 3 || count == 4)
+		return (1);
+	return (0);
 }
-*/
 
 static int	ft_check_inlines(const char *str)
 {
@@ -66,67 +71,25 @@ static int	ft_check_inlines(const char *str)
 	}
 	return (0x0);
 }
-
-
-
 int		ft_read_tetris(int fd)
 {
 	char		buf[22];
 	int			ret;
+	int			ret2;
 	int 		valid_tertis;
-	t_tetrim t;
-	int co;
-	int ln;
-	int i;
-
+	ret2 = 0;
 	valid_tertis = 0;
 	while ((ret = read(fd, buf, 21)))
 	{
 		buf[ret] = '\0';
-		printf("Dots numbers %zu\n", ft_countDots(buf));
-		printf("Hashs numbers %zu\n", ft_countHashs(buf));
-		printf("lines is inlines ? %d\n", ft_check_inlines(buf));
-		printf("the return is %d\n", ret);
 		ft_putstr(buf);
-		if (ft_isTetri(buf) && ft_check_inlines(buf))
-			{
+		ret2++;
+		if (ft_isTetri(buf) && ft_check_inlines(buf) && check_conn(buf))
 				valid_tertis++;
-			}
 		else
-			return (0x0);
-		printf("%d\n" , valid_tertis);
-		if (ret == 20)
-			return (0x1);
+			return (0);
 	}
-	return (0x0);
-}
-/*
-int	ft_check_re(t_tetrim t)
-{
-
-}
-
-
-int 		count(char *str)
-{
-	int points;
-	int hashs;
-	int i;
-
-	i = 0;
-	points = 0;
-	hashs = 0;
-	while (str[i])
-	{
-		if (str[i] == '.')
-			points += 1;
-		else if (str[i] == '#')
-			hashs += 1;
-		i += 1;
-	}
-	if ((str[4] == '\n' || str[9] == '\n' || str[14] == '\n'
-			|| str[19] == '\n' || str[20] == '\n' )&& str[20])
+	if (ret2 == valid_tertis)
 		return (1);
 	return (0);
 }
-*/
