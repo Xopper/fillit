@@ -6,7 +6,7 @@
 /*   By: ahaloua <ahaloua@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 16:44:40 by ahaloua           #+#    #+#             */
-/*   Updated: 2019/06/28 23:37:58 by ahaloua          ###   ########.fr       */
+/*   Updated: 2019/07/04 15:26:08 by aazeroua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,5 @@ typedef struct s_tetris
 }		t_tetris;
 
 int	ft_read_tetris(int fd);
-//int count(char *str);
 
 #endif
