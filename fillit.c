@@ -6,7 +6,7 @@
 /*   By: ahaloua <ahaloua@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 16:45:31 by ahaloua           #+#    #+#             */
-/*   Updated: 2019/07/04 18:52:55 by ahaloua          ###   ########.fr       */
+/*   Updated: 2019/07/08 19:09:34 by ahaloua          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,15 @@ int ft_read_tetris(int fd)
 	char buf[22];
 	int ret;
 	int valid_tetris;
+	int i;
+	int j;
+	int l;
+	int k;
+	t_tetris mtabs;
 
 	ret = 21;
 	valid_tetris = 0;
+	i = 0;
 	if (read(fd, buf, 0))
 		return (0);
 	while (ret == 21 && (ret = read(fd, buf, 21)) > 19)
@@ -89,7 +95,32 @@ int ft_read_tetris(int fd)
 			return (0);
 		else
 		{
-			
+			printf("the len of the buff is %zu\n", ft_strlen(buf));
+			j = 0;
+			l = 0;
+			while (buf[l] != '\0')
+			{
+				k = 0;
+				while (k < 5 && buf[l])
+				{
+					if (buf[l] != '\n')
+						mtabs.multi_tab[i].tab[j][k] = buf[l];
+					else
+						mtabs.multi_tab[i].tab[j][k] = '0';
+					printf("the tetris value is [%c]\n", mtabs.multi_tab[i].tab[j][k]);
+					//printf("[k] value is = %d\n", k);
+					k++;
+					//printf("[l] value is = %d\n", l);
+					l++;
+					
+				}
+				ft_putstr("-_-_\n");
+				//printf("[j] value is = %d\n", j);
+				j++;
+				//printf("[l] value is = %d\n", l);
+			}
+			//printf("[i] value is = %d\n", i);
+			i++;
 		}
 	}
 	return (ret == 20);
