@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fillit.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahaloua <ahaloua@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: ahaloua <ahaloua@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 16:45:31 by ahaloua           #+#    #+#             */
-/*   Updated: 2019/07/08 19:12:33 by ahaloua          ###   ########.fr       */
+/*   Updated: 2019/07/14 16:49:38 by ahaloua          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,56 +71,83 @@ int ft_check_inlines(const char *str, int r)
 		return ((r == 21 && str[20] == '\n') || r == 20);
 }
 
+/*
+void	ft_get_hashs(t_tetrim tet, int col, int ln)
+{
+	int i;
+	int j;
+
+	i = 0;
+	while (1)
+	{
+		j = 0;
+		while(j < 4)
+		{
+			if (tet.tab[i][j] == '#')
+			{
+				col = j;
+				ln = i;
+				return ;
+			}
+			j++;
+		}
+		i++;
+	}
+}
+*/
+
 int ft_read_tetris(int fd)
 {
 	char buf[22];
 	int ret;
-	int valid_tetris;
-	int i;
-	int j;
-	int l;
-	int k;
+	int id;
+	int x;
+	int y;
+	int hid;
+	int count;
+	//int valid_tet;
 	t_tetris mtabs;
 
 	ret = 21;
-	valid_tetris = 0;
-	i = 0;
+	id = 0;
+	//valid_tet = 0;
 	if (read(fd, buf, 0))
 		return (0);
 	while (ret == 21 && (ret = read(fd, buf, 21)) > 19)
 	{
+		//printf("this is for check in id[valid_tet == %d]\n",valid_tet);
 		buf[ret] = '\0';
-		if (valid_tetris++ == 26 || !ft_check_inlines(buf, ret) || !ft_isTetri(buf)
+		if (id == 26 || !ft_check_inlines(buf, ret) || !ft_isTetri(buf)
 		|| !check_conn(buf))
 			return (0);
 		else
 		{
 			printf("the len of the buff is %zu\n", ft_strlen(buf));
-			j = 0;
-			l = 0;
-			while (buf[l] != '\0')
+			count = 0;
+			y = 0;
+			hid = 0;
+			while (buf[count] != '\0')
 			{
-				k = 0;
-				while (k < 5 && buf[l])
+				x = 0;
+				while (x < 5 && buf[count])
 				{
-					if (buf[l] != '\n')
-						mtabs.multi_tab[i].tab[j][k] = buf[l];
-					else
-						mtabs.multi_tab[i].tab[j][k] = '0';
-					printf("the tetris value is [%c]\n", mtabs.multi_tab[i].tab[j][k]);
-					//printf("[k] value is = %d\n", k);
-					k++;
-					//printf("[l] value is = %d\n", l);
-					l++;
-					
+					if (buf[count] != '\n')
+					{
+						if (buf[count] == '#')
+						{
+							mtabs.multi_tab[id].hashtab[hid].cl = x;
+							mtabs.multi_tab[id].hashtab[hid].ln = y;
+							printf("tet[%d] hashid[%d](%d , %d)\n", id, hid, x, y);
+							hid += 1;
+						}
+					}
+					x++;
+					count++;
 				}
-				ft_putstr("-_-_\n");
-				//printf("[j] value is = %d\n", j);
-				j++;
-				//printf("[l] value is = %d\n", l);
+				y++;
 			}
-			//printf("[i] value is = %d\n", i);
-			i++;
+			//printf("this is for check out id[id == %d]\n",id);
+			id++;
 		}
 	}
 	return (ret == 20);
