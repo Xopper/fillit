@@ -6,7 +6,7 @@
 /*   By: ahaloua <ahaloua@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 16:45:31 by ahaloua           #+#    #+#             */
-/*   Updated: 2019/07/15 17:56:40 by ahaloua          ###   ########.fr       */
+/*   Updated: 2019/07/15 23:05:13 by ahaloua          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,6 @@ int ft_read_tetris(int fd)
 			return (0);
 		else
 		{
-			//printf("the len of the buff is %zu\n", ft_strlen(buf));
 			count = 0;
 			y = 0;
 			hid = 0;
@@ -109,7 +108,6 @@ int ft_read_tetris(int fd)
 						{
 							mtabs.multi_tab[id].hashtab[hid].cl = x;
 							mtabs.multi_tab[id].hashtab[hid].ln = y;
-							//printf("tet[%d] hashid[%d](%d , %d)\n", id, hid, x, y);
 							hid += 1;
 						}
 					}
@@ -133,31 +131,27 @@ int ft_read_tetris(int fd)
 				if (minln >= mtabs.multi_tab[id].hashtab[hid].ln)
 					minln = mtabs.multi_tab[id].hashtab[hid].ln;
 			}
-			//printf("[%d(mincl) , %d(minln)\n", mincl, minln);
-			//printf("the new cords !!\n");
 			while (count < 4)
 			{
 				mtabs.multi_tab[id].hashtab[count].cl -= mincl;
 				mtabs.multi_tab[id].hashtab[count].ln -= minln;
-				//printf("tet[%d] hashid[%d](%d , %d)\n", id, hid, mtabs.multi_tab[id].hashtab[count].cl, mtabs.multi_tab[id].hashtab[count].ln);
 				count++;
 			}
-			// print the new tetris ;
 			hid = 0;
 			count = 0;
 			int tmp = 0;
 			int b = 0;
-			while (tmp != ret)
+			while (tmp < ret)
 			{
 				int a = 0;
-				while (a < 4 && tmp != ret)
+				while (a < 4 && tmp < ret)
 				{
 					if (mtabs.multi_tab[id].hashtab[count].cl == a && mtabs.multi_tab[id].hashtab[count].ln == b)
 					{
 						ft_putchar('#');
 						count++;
 					}
-					else if (tmp == (ret - 1) && ret == 21)
+					else if (tmp == (ret - 1))
 					{
 						ft_putchar('\n');
 					}
@@ -166,9 +160,10 @@ int ft_read_tetris(int fd)
 					a++;
 					tmp++;
 				}
-				if (tmp != (ret - 1))
+				if (tmp != (ret))
 					ft_putchar('\n');
 				b++;
+				tmp++;
 			}
 			id++;
 		}
