@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fillit.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahaloua <ahaloua@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ahaloua <ahaloua@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 16:44:40 by ahaloua           #+#    #+#             */
-/*   Updated: 2019/07/14 16:49:39 by ahaloua          ###   ########.fr       */
+/*   Updated: 2019/07/15 15:18:41 by ahaloua          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ typedef struct s_cord
 
 typedef struct s_tetrim
 {
-	//int tab[4][5];
 	t_cord hashtab[4];
+	char gp;
 	char c;
 }		t_tetrim;
 
