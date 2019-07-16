@@ -6,14 +6,14 @@
 /*   By: ahaloua <ahaloua@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 16:45:31 by ahaloua           #+#    #+#             */
-/*   Updated: 2019/07/16 18:03:07 by ahaloua          ###   ########.fr       */
+/*   Updated: 2019/07/16 20:08:42 by ahaloua          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 #include <stdio.h>
 
-int ft_isTetri(const char *str)
+int ft_istetri(const char *str)
 {
 	size_t hashs;
 	size_t dots;
@@ -73,21 +73,21 @@ int ft_check_inlines(const char *str, int r)
 
 void	ft_shift(t_tetrim *one)
 {
-	int i;
+	int hid;
 	int count;
 	int mincl;
 	int minln;
 
-	i = 0;
+	hid = 0;
 	count = 0;
-	mincl = one->hashtab[i].cl;
-	minln = one->hashtab[i].ln;
-	while (++i < 3)
+	mincl = one->hashtab[hid].cl;
+	minln = one->hashtab[hid].ln;
+	while (++hid < 3)
 	{
-		if (mincl >= one->hashtab[i].cl)
-			mincl = one->hashtab[i].cl;
-		if (minln >= one->hashtab[i].ln)
-			minln = (*one).hashtab[i].ln;
+		if (mincl >= one->hashtab[hid].cl)
+			mincl = one->hashtab[hid].cl;
+		if (minln >= one->hashtab[hid].ln)
+			minln = (*one).hashtab[hid].ln;
 	}
 	while (count < 4)
 	{
@@ -97,13 +97,42 @@ void	ft_shift(t_tetrim *one)
 	}
 }
 
+void	ft_stock_hashs(char *buff, t_tetrim *one)
+{
+	int i;
+	int hid;
+	int x;
+	int y;
+
+	i = 0;
+	y = 0;
+	hid = 0;
+	while (buff[i])
+	{
+		x = 0;
+		while (x < 5 && buff[i])
+		{
+			if (buff[i] == '#')
+			{
+					one->hashtab[hid].cl = x;
+					one->hashtab[hid].ln = y;
+					hid += 1;
+			}
+			x++;
+			i++;
+		}
+		y++;
+	}
+
+
+}
 int ft_read_tetris(int fd)
 {
 	char buf[22];
 	int ret;
 	int id;
-	int x;
-	int y;
+	//int x;
+	//int y;
 	int hid;
 	int count;
 	t_tetris mtabs;
@@ -115,11 +144,13 @@ int ft_read_tetris(int fd)
 	while (ret == 21 && (ret = read(fd, buf, 21)) > 19)
 	{
 		buf[ret] = '\0';
-		if (id == 26 || !ft_check_inlines(buf, ret) || !ft_isTetri(buf)
+		if (id == 26 || !ft_check_inlines(buf, ret) || !ft_istetri(buf)
 		|| !check_conn(buf))
 			return (0);
 		else
 		{
+			ft_stock_hashs(buf, &mtabs.multi_tab[id]);
+			/*
 			count = 0;
 			y = 0;
 			hid = 0;
@@ -142,9 +173,10 @@ int ft_read_tetris(int fd)
 				}
 				y++;
 			}
-			//count = 0;
-			//int mincl = 0;
-			//int minln = 0;
+			count = 0;
+			int mincl = 0;
+			int minln = 0;
+			*/
 			ft_shift(&mtabs.multi_tab[id]);
 			/* ft_get_min_vale ()
  			hid = 0;
@@ -159,7 +191,7 @@ int ft_read_tetris(int fd)
 				if (minln >= mtabs.multi_tab[id].hashtab[hid].ln)
 					minln = mtabs.multi_tab[id].hashtab[hid].ln;
 			}
-			
+			// shifting
 			while (count < 4)
 			{
 				mtabs.multi_tab[id].hashtab[count].cl -= mincl;
