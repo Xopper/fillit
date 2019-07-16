@@ -6,7 +6,7 @@
 /*   By: ahaloua <ahaloua@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 16:45:31 by ahaloua           #+#    #+#             */
-/*   Updated: 2019/07/15 23:05:13 by ahaloua          ###   ########.fr       */
+/*   Updated: 2019/07/16 18:03:07 by ahaloua          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,32 @@ int ft_check_inlines(const char *str, int r)
 		return ((r == 21 && str[20] == '\n') || r == 20);
 }
 
+void	ft_shift(t_tetrim *one)
+{
+	int i;
+	int count;
+	int mincl;
+	int minln;
+
+	i = 0;
+	count = 0;
+	mincl = one->hashtab[i].cl;
+	minln = one->hashtab[i].ln;
+	while (++i < 3)
+	{
+		if (mincl >= one->hashtab[i].cl)
+			mincl = one->hashtab[i].cl;
+		if (minln >= one->hashtab[i].ln)
+			minln = (*one).hashtab[i].ln;
+	}
+	while (count < 4)
+	{
+		(*one).hashtab[count].cl -= mincl;
+		(*one).hashtab[count].ln -= minln;
+		count++;
+	}
+}
+
 int ft_read_tetris(int fd)
 {
 	char buf[22];
@@ -116,12 +142,14 @@ int ft_read_tetris(int fd)
 				}
 				y++;
 			}
-			count = 0;
-			hid = 0;
+			//count = 0;
+			//int mincl = 0;
+			//int minln = 0;
+			ft_shift(&mtabs.multi_tab[id]);
+			/* ft_get_min_vale ()
+ 			hid = 0;
 			int mincl;
 			int minln;
-			mincl = 0;
-			minln = 0;
 			mincl = mtabs.multi_tab[id].hashtab[hid].cl;
 			minln = mtabs.multi_tab[id].hashtab[hid].ln;
 			while (++hid < 3)
@@ -131,12 +159,14 @@ int ft_read_tetris(int fd)
 				if (minln >= mtabs.multi_tab[id].hashtab[hid].ln)
 					minln = mtabs.multi_tab[id].hashtab[hid].ln;
 			}
+			
 			while (count < 4)
 			{
 				mtabs.multi_tab[id].hashtab[count].cl -= mincl;
 				mtabs.multi_tab[id].hashtab[count].ln -= minln;
 				count++;
 			}
+			*/
 			hid = 0;
 			count = 0;
 			int tmp = 0;
