@@ -6,23 +6,22 @@
 /*   By: ahaloua <ahaloua@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 16:45:31 by ahaloua           #+#    #+#             */
-/*   Updated: 2019/07/16 20:08:42 by ahaloua          ###   ########.fr       */
+/*   Updated: 2019/07/16 22:57:40 by ahaloua          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 #include <stdio.h>
 
-int ft_istetri(const char *str)
+int		ft_istetri(const char *str)
 {
-	size_t hashs;
-	size_t dots;
-	int i;
-	
+	size_t	hashs;
+	size_t	dots;
+	int		i;
+
 	hashs = 0;
 	dots = 0;
 	i = 0;
-
 	while (str[i] != '\0')
 	{
 		if (str[i] == '#')
@@ -36,7 +35,7 @@ int ft_istetri(const char *str)
 	return (0);
 }
 
-int check_conn(const char *str)
+int		check_conn(const char *str)
 {
 	int i;
 	int count;
@@ -59,16 +58,18 @@ int check_conn(const char *str)
 	return (0);
 }
 
-int ft_check_inlines(const char *str, int r)
+int		ft_check_inlines(const char *str, int r)
 {
-	int i = 4;
-		while (i < 20)
-		{
-			if (str[i] != '\n')
-				return (0);
-			i += 5;
-		}
-		return ((r == 21 && str[20] == '\n') || r == 20);
+	int i;
+
+	i = 4;
+	while (i < 20)
+	{
+		if (str[i] != '\n')
+			return (0);
+		i += 5;
+	}
+	return ((r == 21 && str[20] == '\n') || r == 20);
 }
 
 void	ft_shift(t_tetrim *one)
@@ -114,28 +115,25 @@ void	ft_stock_hashs(char *buff, t_tetrim *one)
 		{
 			if (buff[i] == '#')
 			{
-					one->hashtab[hid].cl = x;
-					one->hashtab[hid].ln = y;
-					hid += 1;
+				one->hashtab[hid].cl = x;
+				one->hashtab[hid].ln = y;
+				hid += 1;
 			}
 			x++;
 			i++;
 		}
 		y++;
 	}
-
-
 }
-int ft_read_tetris(int fd)
+
+int		ft_read_tetris(int fd)
 {
-	char buf[22];
-	int ret;
-	int id;
-	//int x;
-	//int y;
-	int hid;
-	int count;
-	t_tetris mtabs;
+	char		buf[22];
+	int			ret;
+	int			id;
+	int			hid;
+	int			count;
+	t_tetris	mtabs;
 
 	ret = 21;
 	id = 0;
@@ -150,55 +148,8 @@ int ft_read_tetris(int fd)
 		else
 		{
 			ft_stock_hashs(buf, &mtabs.multi_tab[id]);
-			/*
-			count = 0;
-			y = 0;
-			hid = 0;
-			while (buf[count] != '\0')
-			{
-				x = 0;
-				while (x < 5 && buf[count])
-				{
-					if (buf[count] != '\n')
-					{
-						if (buf[count] == '#')
-						{
-							mtabs.multi_tab[id].hashtab[hid].cl = x;
-							mtabs.multi_tab[id].hashtab[hid].ln = y;
-							hid += 1;
-						}
-					}
-					x++;
-					count++;
-				}
-				y++;
-			}
-			count = 0;
-			int mincl = 0;
-			int minln = 0;
-			*/
 			ft_shift(&mtabs.multi_tab[id]);
-			/* ft_get_min_vale ()
- 			hid = 0;
-			int mincl;
-			int minln;
-			mincl = mtabs.multi_tab[id].hashtab[hid].cl;
-			minln = mtabs.multi_tab[id].hashtab[hid].ln;
-			while (++hid < 3)
-			{
-				if (mincl >= mtabs.multi_tab[id].hashtab[hid].cl)
-					mincl = mtabs.multi_tab[id].hashtab[hid].cl;
-				if (minln >= mtabs.multi_tab[id].hashtab[hid].ln)
-					minln = mtabs.multi_tab[id].hashtab[hid].ln;
-			}
-			// shifting
-			while (count < 4)
-			{
-				mtabs.multi_tab[id].hashtab[count].cl -= mincl;
-				mtabs.multi_tab[id].hashtab[count].ln -= minln;
-				count++;
-			}
-			*/
+			// printing :
 			hid = 0;
 			count = 0;
 			int tmp = 0;
