@@ -6,7 +6,7 @@
 /*   By: ahaloua <ahaloua@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 16:45:31 by ahaloua           #+#    #+#             */
-/*   Updated: 2019/07/17 15:57:41 by ahaloua          ###   ########.fr       */
+/*   Updated: 2019/07/18 00:03:41 by ahaloua          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,8 +148,12 @@ int		ft_read_tetris(int fd)
 			ft_stock_hashs(buf, &mtabs.multi_tab[id]);
 			ft_shift(&mtabs.multi_tab[id]);
 			ft_puttet(&mtabs.multi_tab[id], ret);
+			mtabs.multi_tab[id].id = 'A' + id;
+			//ft_putchar(mtabs.multi_tab[id].id);
+			//ft_putchar('\n');
 			id++;
 		}
 	}
+	printf("the good mini map size is [%d]", ft_map_size(id));
 	return (ret == 20);
 }

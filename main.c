@@ -6,12 +6,38 @@
 /*   By: ahaloua <ahaloua@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 16:45:42 by ahaloua           #+#    #+#             */
-/*   Updated: 2019/07/16 15:43:14 by ahaloua          ###   ########.fr       */
+/*   Updated: 2019/07/18 00:25:32 by ahaloua          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 #include <stdio.h>
+
+int		ft_map_size(int nb)
+{
+	nb *= 4;
+
+	while (ft_sqrt(nb) == 0 || ft_sqrt(nb) < 4)
+		nb++;
+	return (ft_sqrt(nb));
+}
+
+int		ft_sqrt(int nb)
+{
+	int i;
+
+	i = 0;
+	if (nb > 0)
+	{
+		while ((i*i) <= nb)
+		{
+			if ((i*i) == nb)
+				return (i);
+			i++;
+		}
+	}
+	return (0);
+}
 
 int main(int argc, char **argv)
 {
