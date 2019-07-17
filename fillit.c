@@ -6,7 +6,7 @@
 /*   By: ahaloua <ahaloua@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 16:45:31 by ahaloua           #+#    #+#             */
-/*   Updated: 2019/07/16 22:57:40 by ahaloua          ###   ########.fr       */
+/*   Updated: 2019/07/17 15:57:41 by ahaloua          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,8 +131,6 @@ int		ft_read_tetris(int fd)
 	char		buf[22];
 	int			ret;
 	int			id;
-	int			hid;
-	int			count;
 	t_tetris	mtabs;
 
 	ret = 21;
@@ -149,35 +147,7 @@ int		ft_read_tetris(int fd)
 		{
 			ft_stock_hashs(buf, &mtabs.multi_tab[id]);
 			ft_shift(&mtabs.multi_tab[id]);
-			// printing :
-			hid = 0;
-			count = 0;
-			int tmp = 0;
-			int b = 0;
-			while (tmp < ret)
-			{
-				int a = 0;
-				while (a < 4 && tmp < ret)
-				{
-					if (mtabs.multi_tab[id].hashtab[count].cl == a && mtabs.multi_tab[id].hashtab[count].ln == b)
-					{
-						ft_putchar('#');
-						count++;
-					}
-					else if (tmp == (ret - 1))
-					{
-						ft_putchar('\n');
-					}
-					else
-						ft_putchar('.');
-					a++;
-					tmp++;
-				}
-				if (tmp != (ret))
-					ft_putchar('\n');
-				b++;
-				tmp++;
-			}
+			ft_puttet(&mtabs.multi_tab[id], ret);
 			id++;
 		}
 	}

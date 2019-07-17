@@ -6,7 +6,7 @@
 /*   By: ahaloua <ahaloua@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 16:44:40 by ahaloua           #+#    #+#             */
-/*   Updated: 2019/07/16 22:58:34 by ahaloua          ###   ########.fr       */
+/*   Updated: 2019/07/17 15:22:28 by ahaloua          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,5 @@ int		check_conn(const char *str);
 int		ft_check_inlines(const char *str, int r);
 void	ft_shift(t_tetrim *one);
 void	ft_stock_hashs(char *buff, t_tetrim *one);
+void	ft_puttet(t_tetrim *one, int ret);
 #endif
