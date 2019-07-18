@@ -6,13 +6,20 @@
 /*   By: ahaloua <ahaloua@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 16:45:42 by ahaloua           #+#    #+#             */
-/*   Updated: 2019/07/18 00:25:32 by ahaloua          ###   ########.fr       */
+/*   Updated: 2019/07/18 22:00:32 by ahaloua          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 #include <stdio.h>
 
+/*
+char	**ft_creat_map(int size)
+{
+	char	**ret;
+
+}
+*/
 int		ft_map_size(int nb)
 {
 	nb *= 4;
@@ -42,9 +49,10 @@ int		ft_sqrt(int nb)
 int main(int argc, char **argv)
 {
 	int fd = open(argv[argc - 1], O_RDONLY);
-	if (ft_read_tetris(fd) == 1)
-		ft_putendl("it's OK");
-	else
-		ft_putendl("KOOO");
+	if (ft_read_tetris(fd) == 0)
+	{
+		ft_putendl("error");
+		return (1);
+	}
 	return (0);
 }

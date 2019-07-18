@@ -6,13 +6,13 @@
 /*   By: ahaloua <ahaloua@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/17 15:51:59 by ahaloua           #+#    #+#             */
-/*   Updated: 2019/07/17 15:54:27 by ahaloua          ###   ########.fr       */
+/*   Updated: 2019/07/18 22:00:35 by ahaloua          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-void	ft_puttet(t_tetrim *one, int ret)
+void	ft_puttet(t_tetrim one, int ret)
 {
 	int count;
 	int tmp;
@@ -27,8 +27,8 @@ void	ft_puttet(t_tetrim *one, int ret)
 		a = -1;
 		while (++a < 4 && tmp < ret)
 		{
-			if (one->hashtab[count].cl == a && one->hashtab[count++].ln == b)
-				ft_putchar('#');
+			if (one.hashtab[count].cl == a && one.hashtab[count++].ln == b)
+				ft_putchar(one.id);
 			else if (tmp == (ret - 1))
 				ft_putchar('\n');
 			else

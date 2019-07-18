@@ -6,7 +6,7 @@
 /*   By: ahaloua <ahaloua@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 16:45:31 by ahaloua           #+#    #+#             */
-/*   Updated: 2019/07/18 00:03:41 by ahaloua          ###   ########.fr       */
+/*   Updated: 2019/07/18 22:00:33 by ahaloua          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ void	ft_stock_hashs(char *buff, t_tetrim *one)
 			{
 				one->hashtab[hid].cl = x;
 				one->hashtab[hid].ln = y;
-				hid += 1;
+				hid++;
 			}
 			x++;
 			i++;
@@ -131,7 +131,7 @@ int		ft_read_tetris(int fd)
 	char		buf[22];
 	int			ret;
 	int			id;
-	t_tetris	mtabs;
+	t_tetris	tab;
 
 	ret = 21;
 	id = 0;
@@ -145,12 +145,12 @@ int		ft_read_tetris(int fd)
 			return (0);
 		else
 		{
-			ft_stock_hashs(buf, &mtabs.multi_tab[id]);
-			ft_shift(&mtabs.multi_tab[id]);
-			ft_puttet(&mtabs.multi_tab[id], ret);
-			mtabs.multi_tab[id].id = 'A' + id;
-			//ft_putchar(mtabs.multi_tab[id].id);
+			tab.multi_tab[id].id = 'A' + id;
+			ft_stock_hashs(buf, &tab.multi_tab[id]);
+			ft_shift(&tab.multi_tab[id]);
+			//ft_putchar(tab.multi_tab[id].id);
 			//ft_putchar('\n');
+			ft_puttet(tab.multi_tab[id], ret);
 			id++;
 		}
 	}
