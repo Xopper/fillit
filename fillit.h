@@ -6,7 +6,7 @@
 /*   By: ahaloua <ahaloua@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 16:44:40 by ahaloua           #+#    #+#             */
-/*   Updated: 2019/07/18 22:00:36 by ahaloua          ###   ########.fr       */
+/*   Updated: 2019/07/19 19:18:09 by ahaloua          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,7 @@ void	ft_stock_hashs(char *buff, t_tetrim *one);
 void	ft_puttet(t_tetrim one, int ret);
 int 	ft_sqrt(int nb);
 int 	ft_map_size(int nb);
+void	ft_creat_map(char ***map, int size);
+void	ft_putmap(char **map);
+void	ft_free_map(char **map);
 #endif

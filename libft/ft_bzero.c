@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahaloua <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ahaloua <ahaloua@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 12:46:29 by ahaloua           #+#    #+#             */
-/*   Updated: 2019/05/24 02:25:01 by ahaloua          ###   ########.fr       */
+/*   Updated: 2019/07/19 16:59:35 by ahaloua          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 void	ft_bzero(void *ptr, size_t n)
 {
-	ft_memset(ptr, 0x0, n);
+	ft_memset(ptr, 0, n);
 }

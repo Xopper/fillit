@@ -6,7 +6,7 @@
 /*   By: ahaloua <ahaloua@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 16:45:31 by ahaloua           #+#    #+#             */
-/*   Updated: 2019/07/18 22:00:33 by ahaloua          ###   ########.fr       */
+/*   Updated: 2019/07/19 18:44:25 by ahaloua          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,8 @@ void	ft_shift(t_tetrim *one)
 	}
 	while (count < 4)
 	{
-		(*one).hashtab[count].cl -= mincl;
-		(*one).hashtab[count].ln -= minln;
+		one->hashtab[count].cl -= mincl;
+		one->hashtab[count].ln -= minln;
 		count++;
 	}
 }
@@ -130,11 +130,11 @@ int		ft_read_tetris(int fd)
 {
 	char		buf[22];
 	int			ret;
-	int			id;
 	t_tetris	tab;
+	int 		id;
 
-	ret = 21;
 	id = 0;
+	ret = 21;
 	if (read(fd, buf, 0))
 		return (0);
 	while (ret == 21 && (ret = read(fd, buf, 21)) > 19)
@@ -148,12 +148,11 @@ int		ft_read_tetris(int fd)
 			tab.multi_tab[id].id = 'A' + id;
 			ft_stock_hashs(buf, &tab.multi_tab[id]);
 			ft_shift(&tab.multi_tab[id]);
-			//ft_putchar(tab.multi_tab[id].id);
-			//ft_putchar('\n');
-			ft_puttet(tab.multi_tab[id], ret);
+			//ft_puttet(tab.multi_tab[id], ret);
 			id++;
 		}
 	}
-	printf("the good mini map size is [%d]", ft_map_size(id));
-	return (ret == 20);
+	//printf("the good mini map size is [%d]", ft_map_size(*id));
+	return (ret == 20 ? ft_map_size(id) : 0);
+
 }
