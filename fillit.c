@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fillit.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahaloua <ahaloua@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: ahaloua <ahaloua@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 16:45:31 by ahaloua           #+#    #+#             */
-/*   Updated: 2019/07/19 18:44:25 by ahaloua          ###   ########.fr       */
+/*   Updated: 2019/07/20 19:31:10 by ahaloua          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ int		check_conn(const char *str)
 	{
 		if (str[i] == '#')
 		{
-			if (str[i + 1] == '#')
+			if (i < 19 && str[i + 1] == '#')
 				count++;
-			if (str[i + 5] == '#')
+			if (i < 14 && str[i + 5] == '#')
 				count++;
 		}
 		i++;
@@ -140,8 +140,7 @@ int		ft_read_tetris(int fd)
 	while (ret == 21 && (ret = read(fd, buf, 21)) > 19)
 	{
 		buf[ret] = '\0';
-		if (id == 26 || !ft_check_inlines(buf, ret) || !ft_istetri(buf)
-		|| !check_conn(buf))
+		if (id == 26 || !ft_check_inlines(buf, ret) || !ft_istetri(buf) || !check_conn(buf))
 			return (0);
 		else
 		{
@@ -152,7 +151,5 @@ int		ft_read_tetris(int fd)
 			id++;
 		}
 	}
-	//printf("the good mini map size is [%d]", ft_map_size(*id));
 	return (ret == 20 ? ft_map_size(id) : 0);
-
 }
