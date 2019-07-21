@@ -3,73 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   fillit.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahaloua <ahaloua@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ahaloua <ahaloua@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 16:45:31 by ahaloua           #+#    #+#             */
-/*   Updated: 2019/07/20 19:31:10 by ahaloua          ###   ########.fr       */
+/*   Updated: 2019/07/21 16:31:21 by ahaloua          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 #include <stdio.h>
 
-int		ft_istetri(const char *str)
+void	ft_puttet(t_tetrim one, int ret)
 {
-	size_t	hashs;
-	size_t	dots;
-	int		i;
-
-	hashs = 0;
-	dots = 0;
-	i = 0;
-	while (str[i] != '\0')
-	{
-		if (str[i] == '#')
-			hashs += 1;
-		else if (str[i] == '.')
-			dots += 1;
-		i += 1;
-	}
-	if (hashs == 4 && dots == 12)
-		return (1);
-	return (0);
-}
-
-int		check_conn(const char *str)
-{
-	int i;
 	int count;
+	int tmp;
+	int a;
+	int b;
 
-	i = 0;
 	count = 0;
-	while (str[i])
+	tmp = 0;
+	b = 0;
+	while (tmp < ret)
 	{
-		if (str[i] == '#')
+		a = -1;
+		while (++a < 4 && tmp < ret)
 		{
-			if (i < 19 && str[i + 1] == '#')
-				count++;
-			if (i < 14 && str[i + 5] == '#')
-				count++;
+			if (one.hashtab[count].cl == a && one.hashtab[count++].ln == b)
+				ft_putchar(one.id);
+			else if (tmp == (ret - 1))
+				ft_putchar('\n');
+			else
+				ft_putchar('.');
+			tmp++;
 		}
-		i++;
+		if (tmp++ != (ret))
+			ft_putchar('\n');
+		b++;
 	}
-	if (count == 3 || count == 4)
-		return (1);
-	return (0);
-}
-
-int		ft_check_inlines(const char *str, int r)
-{
-	int i;
-
-	i = 4;
-	while (i < 20)
-	{
-		if (str[i] != '\n')
-			return (0);
-		i += 5;
-	}
-	return ((r == 21 && str[20] == '\n') || r == 20);
 }
 
 void	ft_shift(t_tetrim *one)
@@ -126,12 +96,11 @@ void	ft_stock_hashs(char *buff, t_tetrim *one)
 	}
 }
 
-int		ft_read_tetris(int fd)
+int		ft_read_tetris(int fd, t_tetris *tab)
 {
-	char		buf[22];
-	int			ret;
-	t_tetris	tab;
-	int 		id;
+	char	buf[22];
+	int		ret;
+	int		id;
 
 	id = 0;
 	ret = 21;
@@ -140,16 +109,18 @@ int		ft_read_tetris(int fd)
 	while (ret == 21 && (ret = read(fd, buf, 21)) > 19)
 	{
 		buf[ret] = '\0';
-		if (id == 26 || !ft_check_inlines(buf, ret) || !ft_istetri(buf) || !check_conn(buf))
+		if (id == 26 || !ft_check_inlines(buf, ret) || !ft_istetri(buf)
+		|| !check_conn(buf))
 			return (0);
 		else
 		{
-			tab.multi_tab[id].id = 'A' + id;
-			ft_stock_hashs(buf, &tab.multi_tab[id]);
-			ft_shift(&tab.multi_tab[id]);
-			//ft_puttet(tab.multi_tab[id], ret);
+			tab->multi_tab[id].id = 'A' + id;
+			ft_stock_hashs(buf, &tab->multi_tab[id]);
+			ft_shift(&tab->multi_tab[id]);
+			ft_puttet(tab->multi_tab[id], ret);
 			id++;
 		}
 	}
+	tab->multi_tab[id].id = 0;
 	return (ret == 20 ? ft_map_size(id) : 0);
 }

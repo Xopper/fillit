@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ahaloua <marvin@42.fr>                     +#+  +:+       +#+         #
+#    By: ahaloua <ahaloua@@student.1337.ma>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2019/03/30 23:34:26 by ahaloua           #+#    #+#              #
-#    Updated: 2019/06/19 15:38:45 by ahaloua          ###   ########.fr        #
+#    Created: 2019/07/21 16:01:12 by ahaloua           #+#    #+#              #
+#    Updated: 2019/07/21 16:16:20 by ahaloua          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -83,13 +83,14 @@ FILES = ft_memset.c \
 		ft_isupper.c \
 		ft_alphamirror.c \
 		ft_strcspn.c \
+		ft_sqrt.c \
 
 OBJ = 	$(FILES:%.c=%.o)
 
 all: $(NAME)
 
 $(NAME):
-	@gcc $(CFLAGS) $(FILES) libft.h
+	@gcc $(CFLAGS) $(FILES) -I libft.h
 	@ar rc $(NAME) $(OBJ)
 clean:
 	@rm -f $(OBJ)

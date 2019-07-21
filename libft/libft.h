@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahaloua <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ahaloua <ahaloua@@student.1337.ma>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 00:06:03 by ahaloua           #+#    #+#             */
-/*   Updated: 2019/06/19 13:26:19 by ahaloua          ###   ########.fr       */
+/*   Updated: 2019/07/21 16:12:55 by ahaloua          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ int					ft_abs(int nb);
 size_t				ft_max_len(const char *s1, const char *s2);
 int					ft_countwords(char const *str, int c);
 int					ft_wordlen(char const *str, int c);
+int					ft_sqrt(int nb);
 
 int					ft_isalpha(int c);
 int					ft_isdigit(int c);
